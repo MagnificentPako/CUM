@@ -1,0 +1,33 @@
+characters = ['sample_character']
+
+[database]
+uri = "postgresql://user:password@localhost:5432"
+
+[web]
+host = 'localhost'
+port = 8000
+session_secret = 'a secret'
+password = 'password'
+
+[esi]
+client_id = 'client id'
+client_secret = 'client secret'
+authorize_url = 'https://login.eveonline.com/v2/oauth/authorize'
+access_token_url = 'https://login.eveonline.com/v2/oauth/token'
+base_url = 'https://esi.evetech.net/latest/'
+scopes = [ 'esi-markets.structure_markets.v1'
+         , 'esi-wallet.read_corporation_wallets.v1'
+         , 'esi-corporations.read_divisions.v1'
+         ]
+
+[cum.sample_station]
+type = 'station'
+station_id = 12345 
+character = 'sample_character'
+minutes = 60
+
+[cum.sample_region]
+type = 'station'
+region_id = 12345 
+character = 'sample_character'
+minutes = 60

@@ -1,0 +1,10 @@
+sqlalchemy
+psycopg2
+toml
+starlette
+uvicorn
+alembic
+authlib
+httpx
+apscheduler
+loguru
