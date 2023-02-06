@@ -27,7 +27,7 @@ def token_refresh_worker(cfg):
                     new_token = res.json()
                     c.access_token = new_token['access_token']
                     c.refresh_token = new_token['refresh_token']
-                    c.expires_at = (datetime.utcnow() + timedelta(seconds=new_token.get('expires_in', 0)).timestamp())
+                    c.expires_at = (datetime.utcnow() + timedelta(seconds=new_token.get('expires_in', 0))).timestamp()
                     sess.commit()
 
 
