@@ -25,7 +25,7 @@ async def handle_page(sess, esi, cur_page, char, division, source):
         )
         try:
             sess.add(entry)
-            session.commit()
+            sess.commit()
         except Exception as e:
             pass
 
