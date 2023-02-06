@@ -9,7 +9,7 @@ import httpx
 from datetime import datetime, timedelta
 import logging
 
-def token_refresh_worker(cfg, division, char):
+def token_refresh_worker(cfg):
     async def worker():
         engine = create_engine(cfg['database']['uri'])
         with Session(engine, future=True) as sess:
