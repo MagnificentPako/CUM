@@ -49,7 +49,7 @@ def corp_wallet_worker(cfg, division, char, source):
             )
             verify = await esi.get('https://login.eveonline.com/oauth/verify')
             char_id = verify.json()['CharacterID']
-            affiliations = await esi.post('/characters/affiliations', json={'characters' : [char_id]})
+            affiliations = await esi.post('/characters/affiliation', json={'characters' : [char_id]})
             corp_id = affiliations.json()[0]['corporation_id']
             res = await esi.get('/corporations/{}/wallets/{}/journal'.format(corp_id, division))
             pages = res.headers.get('X-Pages', 1)
