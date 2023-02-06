@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from models import Character, CorpWalletEntry
 from sqlalchemy.dialects.postgresql import insert
 from dateutil import parser
+import dateparser
 
 async def handle_page(sess, esi, cur_page, char, division, source):
     for j in cur_page:
