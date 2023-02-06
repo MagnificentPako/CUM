@@ -48,7 +48,7 @@ def corp_wallet_worker(cfg, division, char, source):
                 token=token
             )
             verify = await esi.get('https://login.eveonline.com/oauth/verify')
-            char_id = verify['CharacterID']
+            char_id = verify.json()['CharacterID']
             affiliations = await esi.post('/characters/affiliations', json={'characters' : [char_id]})
             corp_id = affiliations[0]['corporation_id']
             res = await esi.get('/corporations/{}/wallets/{}/journal'.format(corp_id, division))
