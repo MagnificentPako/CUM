@@ -60,6 +60,5 @@ def corp_wallet_worker(cfg, division, char, source):
                 res = await esi.get('/corporations/{}/wallets/{}/journal'.format(corp_id, division), params={'page': page})
                 cur_page = res.json()
                 await handle_page(sess, esi, cur_page, char, division, source)
-            await esi.close()
 
     return worker
