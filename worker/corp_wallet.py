@@ -21,7 +21,6 @@ async def handle_page(sess, esi, cur_page, char, division, source):
             reason = j['reason'],
             ref_type = j['ref_type'],
             second_party_id = j['second_party_id'],
-            division = division,
             source = source
         )
         try:
