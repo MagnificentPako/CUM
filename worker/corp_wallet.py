@@ -6,7 +6,7 @@ from models import Character, CorpWalletEntry
 from sqlalchemy.dialects.postgresql import insert
 from dateutil import parser
 
-async def handle_page(sess, esi, cur_page, char, division):
+async def handle_page(sess, esi, cur_page, char, division, source):
     for j in cur_page:
         entry = CorpWalletEntry(
             id = j["id"],
@@ -21,7 +21,7 @@ async def handle_page(sess, esi, cur_page, char, division):
             ref_type = j['ref_type'],
             second_party_id = j['second_party_id'],
             division = division,
-            source = char
+            source = source
         )
         try:
             sess.add(entry)
@@ -29,7 +29,7 @@ async def handle_page(sess, esi, cur_page, char, division):
         except Exception as e:
             pass
 
-def corp_wallet_worker(cfg, division, char):
+def corp_wallet_worker(cfg, division, char, source):
     async def worker():
         engine = create_engine(cfg['database']['uri'])
         with Session(engine, future=True) as sess:
@@ -55,11 +55,11 @@ def corp_wallet_worker(cfg, division, char):
             pages = res.headers.get('X-Pages', 1)
             cur_page = res.json()
 
-            await handle_page(sess, esi, cur_page, char, division)
+            await handle_page(sess, esi, cur_page, char, division, source)
             for page in range(2, int(pages)+1):
                 res = await esi.get('/corporations/{}/wallets/{}/journal'.format(corp_id, division), params={'page': page})
                 cur_page = res.json()
-                await handle_page(sess, esi, cur_page, char, division)
+                await handle_page(sess, esi, cur_page, char, division, source)
             await esi.close()
 
     return worker

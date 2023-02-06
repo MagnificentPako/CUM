@@ -6,7 +6,7 @@ from models import Character, ItemType, StationMarketIteration, StationMarketEnt
 from sqlalchemy.dialects.postgresql import insert
 from dateutil import parser
 
-async def handle_page(sess, esi, cur_page, existing_types, iteration, char, source):
+async def handle_page(sess, esi, cur_page, existing_types, iteration, char):
     current_types = set(map(lambda x: x['type_id'], cur_page))
     new_types = list(current_types - existing_types)
     if(len(new_types) > 0):
