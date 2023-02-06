@@ -6,7 +6,7 @@ from models import Character, ItemType, StationMarketIteration, StationMarketEnt
 from sqlalchemy.dialects.postgresql import insert
 from dateutil import parser
 
-async def handle_page(sess, esi, cur_page, existing_types, iteration, char):
+async def handle_page(sess, esi, cur_page, existing_types, iteration, char, source):
     current_types = set(map(lambda x: x['type_id'], cur_page))
     new_types = list(current_types - existing_types)
     if(len(new_types) > 0):
@@ -39,7 +39,7 @@ async def prime_market_iteration(sess, char):
     sess.execute(insert(StationMarketIteration).values(source_char=char, iteration=1))
     sess.commit()
 
-def station_worker(cfg, station, char):
+def station_worker(cfg, station, char, source):
     async def worker():
         engine = create_engine(cfg['database']['uri'])
         with Session(engine, future=True) as sess:

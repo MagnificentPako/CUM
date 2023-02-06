@@ -29,7 +29,7 @@ async def start_workers(config):
                              , OrTrigger([trigger, DateTrigger(datetime.now())]))
         if(worker['type'] == 'corp_wallet'):
             trigger = IntervalTrigger(minutes = worker['minutes'])
-            scheduler.add_job( corp_wallet_worker(config, worker['division'], worker['character'])
+            scheduler.add_job( corp_wallet_worker(config, worker['division'], worker['character'], name)
                              , OrTrigger([trigger, DateTrigger(datetime.now())]))
         if(worker['type'] == 'refresh'):
             trigger = IntervalTrigger(minutes = worker['minutes'])
