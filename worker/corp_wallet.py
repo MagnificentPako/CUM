@@ -26,7 +26,7 @@ async def handle_page(sess, esi, cur_page, char, division):
         try:
             sess.add(entry)
             session.commit()
-        except: Exception as e:
+        except Exception as e:
             pass
 
 def corp_wallet_worker(cfg, division, char):
